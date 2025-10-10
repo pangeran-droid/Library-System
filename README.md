@@ -7,6 +7,61 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+<h2 align="center">📚 Library Management System</h2>
+<p align="center">Sistem manajemen perpustakaan berbasis web menggunakan Laravel 10, Jetstream, dan Livewire.</p>
+
+## ⚙️ Instalasi & Cara Menjalankan
+
+### 1️⃣ Clone Repository
+```bash
+git clone https://github.com/<username>/Library-System.git
+cd Library-System
+```
+### 2️⃣ Install Dependency Laravel (PHP)
+```bash
+composer install
+```
+### 3️⃣ Install Dependency Frontend (Node.js)
+```bash
+npm install
+npm run build
+```
+### 4️⃣ Salin File .env
+```bash
+cp .env.example .env
+```
+### 5️⃣ Generate APP_KEY
+```bash
+php artisan key:generate
+```
+### 6️⃣ Konfigurasi Database
+Edit file .env dan sesuaikan bagian ini:
+```bash
+DB_DATABASE=library_system
+DB_USERNAME=root
+DB_PASSWORD=
+```
+### 7️⃣ Migrasi Database
+```bash
+php artisan migrate
+php artisan db:seed
+```
+### 9️⃣ Jalankan Server
+```bash
+php artisan serve
+```
+### Buka di browser:
+```bash
+http://127.0.0.1:8000
+```
+#### Login Admin
+email: admin@gmail.com
+pw: password
+#### Login User
+email: user@gmail.com
+pw: password
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
