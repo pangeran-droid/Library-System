@@ -142,4 +142,52 @@ class AdminController extends Controller
 
         return redirect()->back()->with('message', 'Book Deleted Successfully');
     }
+    public function edit_book($id)
+    {
+        $data = Book::find($id);
+
+        $data = Category::all();
+
+        return view('admin.edit_book', compact('data', 'category'));
+    }
+    public function udate_book(Request $request,$id)
+    {
+        $data = Book::find($id);
+
+        $data->title = $request->title;
+
+        $data->auther_name = $request->auther_name;
+
+        $data->price = $request->price;
+
+        $data->quantity = $request->quantity;
+
+        $data->description = $request->description;
+
+        $data->category_id = $request->category;
+
+        $book_image = $request->book_img;
+        $auther_image = $request->auther_img;
+
+        if($book_image) {
+            $book_image_name = time().'.'.$book_image->getClientOriginalExtension();
+
+            $request->book_img->move('book', $book_image_name);
+
+            $data->book_img = $book_image_name;
+        }
+
+        if($auther_image) {
+            $auther_image_name = time().'.'.$auther_image->getClientOriginalExtension();
+
+            $request->auther_img->move('auther', $auther_image_name);
+
+            $data->auther_img = $auther_image_name;
+        }
+
+
+        $data->save();
+
+        return redirect('/show_book')->with('message','Book Updated Successfully');
+    }
 }
