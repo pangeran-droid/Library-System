@@ -6,6 +6,7 @@
           <div class="title">
             <h1 class="h5">Mark Stephen</h1>
             <p>Web Designer</p>
+            <p>Web Designer</p>
           </div>
         </div>
         <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
