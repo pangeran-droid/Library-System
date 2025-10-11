@@ -90,6 +90,9 @@
                   <span class="ends">
                     Total<br><strong>20</strong><br>
                   </span>
+                  <span class="ends">
+                    Totl<br><strong>20</strong><br>
+                  </span>
                   <div class="text-button">
                     <a href="details.html">View Item Details</a>
                   </div>
