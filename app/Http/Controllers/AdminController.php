@@ -30,7 +30,8 @@ class AdminController extends Controller
             else if($user_type == 'user')
 
                 {
-                    return view('home.index');
+                    $data = Book::all();
+                    return view('home.index'compact('data'));
                 }
 
             else
