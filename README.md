@@ -7,59 +7,108 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+---
+
 <h2 align="center">📚 Library Management System</h2>
-<p align="center">Sistem manajemen perpustakaan berbasis web menggunakan Laravel 10, Jetstream, dan Livewire.</p>
+<p align="center">Sistem manajemen perpustakaan berbasis web menggunakan <strong>Laravel 10</strong>, <strong>Jetstream</strong>, dan <strong>Livewire</strong>.</p>
+
+---
+
+## ⚠️ Prasyarat (Wajib Diinstal)
+
+Sebelum memulai, pastikan Anda telah menginstal alat-alat berikut. Kunjungi tautan yang disediakan untuk mengunduh:
+
+1. **PHP** (Versi 8.1+):  
+   [Unduh PHP](https://www.php.net/downloads.php) atau gunakan XAMPP/MAMP/Laragon.
+   
+2. **Composer** (Manajer Dependensi PHP):  
+   [Unduh Composer](https://getcomposer.org/download/).
+
+3. **Node.js & npm** (Untuk Frontend):  
+   [Unduh Node.js](https://nodejs.org/en/download/).
+
+4. **Git** (Untuk Mengkloning Repositori):  
+   [Unduh Git](https://git-scm.com/downloads).
+
+5. **Server Database** (MySQL/MariaDB):  
+   Biasanya tersedia di XAMPP/MAMP/Laragon.
+
+---
 
 ## ⚙️ Instalasi & Cara Menjalankan
 
+Ikuti langkah-langkah di bawah ini secara berurutan.
+
 ### 1️⃣ Clone Repository
+
+Buka Terminal (CMD/PowerShell/Git Bash) dan jalankan perintah berikut:
+
 ```bash
-git clone https://github.com/<username>/Library-System.git
+git clone https://github.com/pangeran-droid/Library-System.git
 cd Library-System
 ```
+
 ### 2️⃣ Install Dependency Laravel (PHP)
+
 ```bash
 composer install
 ```
+(⚠️ Jika Composer tidak ditemukan, pastikan Anda sudah menginstalnya.)
+
 ### 3️⃣ Install Dependency Frontend (Node.js)
+
+Install dependency frontend dan build asset menggunakan npm:
+
 ```bash
 npm install
 npm run build
 ```
+(⚠️ Jika npm tidak ditemukan, pastikan Anda sudah menginstal Node.js.)
+
 ### 4️⃣ Salin File .env
+
 ```bash
 cp .env.example .env
 ```
+
 ### 5️⃣ Generate APP_KEY
+
 ```bash
 php artisan key:generate
 ```
+
 ### 6️⃣ Konfigurasi Database
-Edit file .env dan sesuaikan bagian ini:
+
 ```bash
 DB_DATABASE=library_system
 DB_USERNAME=root
 DB_PASSWORD=
 ```
+
 ### 7️⃣ Migrasi Database
+
 ```bash
 php artisan migrate
 php artisan db:seed
 ```
-### 9️⃣ Jalankan Server
+### 8️⃣ Jalankan Server
+
+Setelah semua selesai, jalankan server Laravel dengan perintah berikut:
+
 ```bash
 php artisan serve
 ```
-### Buka di browser:
-```bash
-http://127.0.0.1:8000
-```
-#### Login Admin
-email: admin@gmail.com
-pw: password
-#### Login User
-email: user@gmail.com
-pw: password
+Aplikasi akan berjalan di http://127.0.0.1:8000. Buka di browser Anda untuk mengakses aplikasi.
+
+### 🔑 Login Admin & User
+
+<h4>Login Admin:</h4>
+- Email: admin@gmail.com
+- Password: password
+
+<h4>Login User:</h4>
+- Email: user@gmail.com
+- Password: password
 
 
 ## About Laravel
