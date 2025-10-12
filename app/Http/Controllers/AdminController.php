@@ -31,7 +31,7 @@ class AdminController extends Controller
 
                 {
                     $data = Book::all();
-                    return view('home.index'compact('data'));
+                    return view('home.index', compact('data'));
                 }
 
             else
