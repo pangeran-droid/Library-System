@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('borrows', function (Blueprint $table) {
             $table->id();
 
-            $table->foreigId('book_id')->constrained()->onDelete('cascade');
+            $table->unsignedInteger('book_id')->constrained()->onDelete('cascade');
 
-            $table->foreigId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedInteger('user_id')->constrained()->onDelete('cascade');
 
             $table->string('status')->default('Rejected');
 

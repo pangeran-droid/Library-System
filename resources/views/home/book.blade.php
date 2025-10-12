@@ -7,6 +7,15 @@
             <h2><em>Items</em> Currently In The Market.</h2>
           </div>
         </div>
+
+        
+        
+        
+
+
+
+
+
         <div class="col-lg-6">
           <div class="filters">
             <ul>
@@ -38,7 +47,12 @@
                     Current Available<br><strong>{{$data->quantity}}</strong><br> 
                   </span>
                   <div class="text-button">
-                    <a href="details.html">View Item Details</a>
+                    <a href="{{url('book_detail',$data->id)}}">View Item Details</a>
+                  </div>
+                </br>
+
+                  <div class="">
+                    <a class="btn btn-primary" href="{{url('borrow_books',$data->id)}}">Apply to Borrow</a>
                   </div>
                 </div>
               </div>
