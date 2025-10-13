@@ -48,6 +48,7 @@
                     <th>Quantity</th>
                     <th>Borrow Status</th>
                     <th>Book Image</th>
+                    <th>Change Status</th>
                 </tr>
 
                 @foreach ($data as $data)
@@ -59,9 +60,34 @@
 
                     <td>{{ $data->book->title }}</td>
                     <td>{{ $data->book->quantity }}</td>
-                    <td>{{ $data->status }}</td>
+                    <td>
+                      @if ($dta->status == 'approved')
+                      <span style="color: skyblue;">{{ $data->status }}</span>
+                      
+                      @endif
+
+                      @if ($dta->status == 'rejected')
+                      <span style="color: red;">{{ $data->status }}</span>
+                      
+                      @endif
+
+                      @if ($dta->status == 'returned')
+                      <span style="color: yellow;">{{ $data->status }}</span>
+                      
+                      @endif
+
+                      @if ($dta->status == 'Applied')
+                      <span style="color: white;">{{ $data->status }}</span>
+                      
+                      @endif
+                    </td>
                     <td>
                         <img style="height: 150px; width: 60px" src="book/{{ $data->book->book_img }}">
+                    </td>
+                    <td>
+                      <a class="btn btn-warning" href="{{ url('approve_book',$data->id) }}">Approved</a>
+                      <a class="btn btn-danger" href="{{ url('rejected_book',$data->id) }}">Rejected</a>
+                      <a class="btn btn-info" href="{{ url('return_book',$data->id) }}">Returned</a>
                     </td>
                 </tr>
 
