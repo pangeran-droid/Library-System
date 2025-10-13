@@ -10,6 +10,8 @@ use App\Models\Book;
 
 use App\Models\Category;
 
+use App\Models\Borrow;
+
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -191,4 +193,16 @@ class AdminController extends Controller
 
         return redirect('/show_book')->with('message','Book Updated Successfully');
     }
+
+    public function borrow_request()
+    {
+
+        $data = Borrow::all();
+
+        return view('admin.borrow_request');
+
+
+
+    }
+
 }
