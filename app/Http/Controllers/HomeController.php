@@ -58,4 +58,8 @@ class HomeController extends Controller
             return redirect()->back()->with('message','Not enough book Available');
          }
     }
+     public function book_historu()
+     {
+        return view('home.book_history');
+     }
 }
