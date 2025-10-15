@@ -58,7 +58,7 @@ class HomeController extends Controller
             return redirect()->back()->with('message','Not enough book Available');
          }
     }
-     public function book_historu()
+     public function book_history()
      {
         if(Auth::id())
         {
@@ -67,5 +67,12 @@ class HomeController extends Controller
           return view('home.book_history',compact('data'));
         }
         
+     }
+     public function cancel_req($id)
+     {
+        $data = Borrow::find($id);
+        $data->delete();
+        return redirect()->back()->with('message','Book Borrow request
+           canceled successfully');
      }
 }

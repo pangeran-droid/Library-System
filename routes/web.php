@@ -48,3 +48,4 @@ Route::get('/approve_book/{id}', [AdminController::class,'approve_book']);
 Route::get('/return_book/{id}', [AdminController::class,'return_book']);
 Route::get('/rejected_book/{id}', [AdminController::class,'rejected_book']);
 Route::get('/book_history', [HomeController::class,'book_history']);
+Route::get('/cancel_req/{id}', [HomeController::class,'cancel_req']);

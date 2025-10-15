@@ -50,12 +50,25 @@
     <div class="container">
       <div class="row">
 
+         @if(session()->has('mesagge'))
+
+         <div style="margin-top: 100px;" class="alert alert-success">
+
+         {{session()->get('message')}}
+         <button type="button" class="close" aria-hidden="true"
+         data-bs-dismiss="alert">x</button>
+
+        </div>
+
+         @endif
+
       <table class="table_deg">
         <tr>
           <th>Book Name</th>
           <th>Book Auther</th>
           <th>Book status</th>
           <th>Image</th>
+          <th>Cancel Request</th>
       
         </tr>
         @foreach($data as $data)
@@ -65,6 +78,17 @@
           <td>{{$data->status}}</td>
           <td>
             <img class="book_img" src="book/{{$data->book_img}}">
+          </td>
+          <td>
+
+             @if($data->status == 'Applied')
+
+            <a href="{{url('cancel_req',$data->id)}}" class="btn 
+            btn-warning">cancel</a>
+
+            @else
+            <p style="collor: white; font-weight: bold;">Not Allowed</p>
+            @endif
           </td>
         </tr>
 
