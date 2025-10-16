@@ -3,8 +3,7 @@
   <head>
     <!-- Css-->
     @include('admin.css')
-    <style type="text/css"></style>
-
+    <style type="text/css">
     .div_center
     {
         text.align: center;
@@ -17,19 +16,16 @@
         font-size: 30px;
         font-wight: bold;
     }
-
     .label
     {
         display: inline-black;
         width: 200px;
     }
-
     .div_pad
     {
         padding: 15%;
     }
-
-
+    </style>
     <!-- End Css-->
   </head>
   <body>

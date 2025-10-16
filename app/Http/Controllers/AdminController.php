@@ -99,7 +99,6 @@ class AdminController extends Controller
     public function store_book(Request $request)
     {
         $data = new Book;
-
         $data->title = $request->title;
         $data->auther_name = $request->auther_name;
         $data->price = $request->price;
@@ -247,8 +246,5 @@ class AdminController extends Controller
             return redirect()->back();
 
         }
-        
-
     }
-
 }

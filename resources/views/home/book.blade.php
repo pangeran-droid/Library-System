@@ -8,14 +8,6 @@
           </div>
         </div>
 
-        
-        
-        
-
-
-
-
-
         <div class="col-lg-6">
           <div class="filters">
             <ul>

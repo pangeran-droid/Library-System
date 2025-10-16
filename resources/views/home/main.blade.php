@@ -6,7 +6,6 @@
 
           <div class="alert alert-success">
 
-          
             {{session()-get('message')}}
 
             <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">x</button>

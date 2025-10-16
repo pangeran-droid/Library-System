@@ -12,7 +12,6 @@
             border: 1px solid yellowgreen;
             margin-top: 50px;
         }
-
         th {
             background-color: skyblue;
             padding: 10px;
