@@ -41,6 +41,19 @@
             </ul>
           </div>
         </div>
+        <form action="{{ url('search') }}" method="get">
+           @csrf
+                 <div class="row" style="margin: 30px;">
+            <div class="col-md-8">
+              <input class="form-control" type="search" name="search" placeholder="search for book title, auther name, category">
+
+            </div>
+            <div class="col-md-4">
+              <input class="btn-primary" type="submit" value="search">
+
+            </div>
+        </div>
+        </form>
         <div class="col-lg-12">
           <div class="row grid">
 
