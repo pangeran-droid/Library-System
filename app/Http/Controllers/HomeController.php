@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Borrow;
+use App\Models\Category;
 use Illuminate\Support\Facedes\Auth;
 use App\Models\User;
 
@@ -70,9 +71,24 @@ class HomeController extends Controller
      }
      public function explore()
      {
+        $category = category::all();
         $data = Book::all();
 
-        return view('home.explore',compact('data'));
+        return view('home.explore',compact('data', 'category'));
 
+     }
+     public function search(request $requwst)
+     {
+        $category = category::all();
+        $search = $_REQUEST-> search;
+        $data = book :: where('title', 'like','%'.$search.'%')->orWhere ('auther_name', 'like','%'.$search.'%')->get();
+        return view('home.explore',compact('data', 'category'));
+
+     }
+     public function cat_search($id)
+     {
+        $category = category::all();
+        $data = book::where('category_id',$id)->get();
+         return view('home.explore',compact('data', 'category'));
      }
 }

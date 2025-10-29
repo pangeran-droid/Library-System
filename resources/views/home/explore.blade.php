@@ -3,6 +3,7 @@
 
   <head>
 
+<base href="/public">
     @include('home.css')
   </head>
 
@@ -16,6 +17,7 @@
      <div class="currently-market">
     <div class="container">
       <div class="row">
+
         <div class="col-lg-6">
           <div class="section-heading">
             <div class="line-dec"></div>
@@ -31,13 +33,22 @@
 
 
 
-        <div class="col-lg-6">
+        <div class="col-lg-6" style="margin-top: 100px;">
           <div class="filters">
             <ul>
               <li data-filter="*"  class="active">All Books</li>
-              <li data-filter=".msc">Popular</li>
-              <li data-filter=".dig">Latest</li>
+
+              @foreach($category as $category)
+
+              <li>
+                <a href="{{ url('cat_search', $category->id) }}">{{ $category->cat_title }}</a>
               
+              {{ $category->cat_title }}</li>
+
+              @endforeach
+              
+
+
             </ul>
           </div>
         </div>
@@ -45,7 +56,7 @@
            @csrf
                  <div class="row" style="margin: 30px;">
             <div class="col-md-8">
-              <input class="form-control" type="search" name="search" placeholder="search for book title, auther name, category">
+              <input class="form-control" type="search" name="search" placeholder="search for book title, auther name">
 
             </div>
             <div class="col-md-4">
