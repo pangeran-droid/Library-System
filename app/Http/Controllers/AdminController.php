@@ -29,7 +29,7 @@ class AdminController extends Controller
                     $user = user::all()->count();
                     $book = book::all()->count();
                     $borrow = borrow::where('status','approved')->count();
-                    $retuened = borrow::where('status','returned')->count();
+                    $returned = borrow::where('status','returned')->count();
                     return view('admin.index',compact('user','book','borrow','returned'));
                 }
 

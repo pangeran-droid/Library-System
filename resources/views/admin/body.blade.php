@@ -26,7 +26,7 @@
                     <div class="title">
                       <div class="icon"><i class="icon-contract"></i></div><strong>total books</strong>
                     </div>
-                    <div class="number dashtext-2">{{ $Book }}</div>
+                    <div class="number dashtext-2">{{ $book }}</div>
                   </div>
                   <div class="progress progress-template">
                     <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-2"></div>
