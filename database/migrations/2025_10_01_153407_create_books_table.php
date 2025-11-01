@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('quantity')->nullable();
             $table->string('book_img')->nullable();
             $table->string('auther_img')->nullable();
+            $table->string('book_code')->unique()->nullable();
 
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             

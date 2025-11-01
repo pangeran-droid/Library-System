@@ -2,29 +2,18 @@
   <div class="main-banner">
     <div class="container">
       <div class="row">
-      @if(session()->has('massage'))
-
-          <div class="alert alert-success">
-
-            {{session()-get('message')}}
-
-            <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">x</button>
-
-          </div>
-
-          @endif
 
         <div class="col-lg-6 align-self-center">
           <div class="header-text">
-            <h6>Book is Knowledge</h6>
-            <h2>Knowledge is Power</h2>
-            <p>Library is a really cool and professional design for your websites. This HTML CSS template is based on Bootstrap v5 and it is designed for related web portals. Liberty can be freely downloaded from github</p>
+            <h6>Welcome to the Digital Library System</h6>
+            <h2>Borrowing Books <em>Easier</em> & Faster</h2>
+            <p>This system makes it easy for you to search, borrow, and manage your book collection online. Access book information from anywhere without having to visit the library in person.</p>
             <div class="buttons">
               <div class="border-button">
-                <a href="explore.html">Explore Top Books</a>
+                <a href="{{url('explore')}}">Explore Top Books</a>
               </div>
               <div class="main-button">
-                <a href="" target="_blank">Watch Our Videos</a>
+                <a href="#books">Borrow Now</a>
               </div>
             </div>
           </div>
@@ -32,10 +21,10 @@
         <div class="col-lg-5 offset-lg-1">
           <div class="">
             <div class="item">
-              <img src="assets/images/banner.png" alt="">
+              <img src="{{ asset('assets/images/banner.png') }}" alt="">
             </div>
             <div class="item">
-              <img src="assets/images/banner2.png" alt="">
+              <img src="{{ asset('assets/images/banner2.png') }}" alt="">
             </div>
           </div>
         </div>

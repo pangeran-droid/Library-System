@@ -6,89 +6,143 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Borrow;
 use App\Models\Category;
-use Illuminate\Support\Facedes\Auth;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\RoundBlockSizeMode;
 
 class HomeController extends Controller
 {
     public function index()
     {
         $data = Book::all();
-        return view('home.index', compact('data'));
+        
+        $category = Category::all();
+
+        $title = 'Home';
+
+        return view('home.index', compact('data', 'category', 'title'));
     }
+
+    public function borrow_books($id)
+    {
+        if (!Auth::check()) {
+            return redirect()->back()->with('message', 'You must login to borrow a book.');
+        }
+
+        $data = Book::find($id);
+
+        if (!$data) {
+            return redirect()->back()->with('message', 'Book not found.');
+        }
+
+        if ($data->quantity <= 0) {
+            return redirect()->back()->with('message', 'Book is already out of stock.');
+        }
+
+        $user_id = Auth::user()->id;
+
+        $existing = Borrow::where('book_id', $id)
+                  ->where('user_id', $user_id)
+                  ->whereIn('status', ['Applied', 'Approved'])
+                  ->first();
+
+        if ($existing) {
+            return redirect()->back()->with('message', 'You already have a pending or approved request for this book.');
+        }
+
+        $borrow = new Borrow;
+        $borrow->book_id = $id;
+        $borrow->user_id = $user_id;
+        $borrow->status = 'Applied';
+        $borrow->save();
+
+        return redirect()->back()->with('message', 'A request is sent to admin to borrow this book.');
+    }
+
+    public function book_history()
+    {
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            $data = Borrow::where('user_id', '=', $user_id)->get();
+
+            $title = 'My History';
+            
+            return view('home.book_history', compact('data', 'title'));
+        } else {
+            return redirect()->route('login')->with('message', 'Please login first.');
+        }
+    }
+
+    public function cancel_req($id)
+    {
+        $data = Borrow::find($id);
+
+        $data->delete();
+
+        return redirect()->back()->with('message', 'Book Borrow request canceled successfully');
+    }
+
+    public function explore()
+    {
+        $category = Category::all();
+
+        $data = Book::all();
+
+        $title = 'Explore Books';
+
+        return view('home.explore', compact('data', 'category', 'title'));
+    }
+
+    public function search(Request $request)
+    {
+        $category = Category::all();
+
+        $search = $request->search;
+
+        $data = Book::where('title', 'LIKE', '%'. $search. '%')->orWhere('auther_name', 'LIKE', '%'. $search. '%')->get();
+
+        $title = 'Search';
+
+        return view('home.explore', compact('data', 'category', 'title'));
+    }
+
+    public function cat_search($id)
+    {
+        $category = Category::all();
+
+        $data = Book::where('category_id', $id)->get();
+
+        $title = 'Category Search';
+
+        return view('home.explore', compact('data', 'category', 'title'));
+    }
+
     public function book_details($id)
     {
-        $data = Book::all();
-        return view('home.book_details', compact('data'));
-    }
-    public function borrow_book()
-    {
         $data = Book::find($id);
-        $book_id = $id;
-        $quantity = $data->quantity;
 
-         if($quantity >='1')
-         {
-            if(Auth::id())
-            {
-                $user = Auth::user()->id;
-                $borrow = new Borrow;
-                $borrow->book_id = $book_id;
-                $borrow->user_id = $user_id;
-                $borrow->status = 'Applied';
-                $borrow->save();
-
-                return redirect()->back()->with('message','A request is send to admin to borrow this book');
-            }
-
-            else
-            {
-                return redirect('/login');
-            }
-         }
-
-         else
-         {
-            return redirect()->back()->with('message','Not enough book Available');
-         }
-    }
-     public function book_history()
-     {
-        if(Auth::id())
-        {
-          $userid = Auth::user()->id; 
-          $data = Borrow::where('user_id','=',$userid)->get(); 
-          return view('home.book_history',compact('data'));
+        if (!$data) {
+            return redirect()->back()->with('message', 'Book not found.');
         }
-        
-     }
-     public function cancel_req($id)
-     {
-        $data = Borrow::find($id);
-        $data->delete();
-        return redirect()->back()->with('message','Book Borrow request
-           canceled successfully');
-     }
-     public function explore()
-     {
-        $category = category::all();
-        $data = Book::all();
 
-        return view('home.explore',compact('data', 'category'));
+        $bookUrl = url('book_details/' . $data->id);
 
-     }
-     public function search(request $requwst)
-     {
-        $category = category::all();
-        $search = $_REQUEST-> search;
-        $data = book :: where('title', 'like','%'.$search.'%')->orWhere ('auther_name', 'like','%'.$search.'%')->get();
-        return view('home.explore',compact('data', 'category'));
+        $qr = QrCode::create($bookUrl)
+            ->setEncoding(new Encoding('UTF-8'))
+            ->setErrorCorrectionLevel(ErrorCorrectionLevel::High)
+            ->setSize(200)
+            ->setMargin(10)
+            ->setRoundBlockSizeMode(RoundBlockSizeMode::Margin);
 
-     }
-     public function cat_search($id)
-     {
-        $category = category::all();
-        $data = book::where('category_id',$id)->get();
-         return view('home.explore',compact('data', 'category'));
-     }
+        $writer = new PngWriter();
+        $result = $writer->write($qr);
+        $data->qr_base64 = base64_encode($result->getString());
+
+        $title = 'Books Details';
+
+        return view('home.book_details', compact('data', 'title'));
+    }
 }

@@ -1,107 +1,131 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Css-->
     @include('admin.css')
-    <style type="text/css">
-        .center
-        {
-            text-align: center;
-            margin: auto;
-            width: 80%;
-            border: 1px solid white;
-            margin-top: 60px;
-        }
 
-        th
-        {
-            background-color: skyblue;
-            text-align: center;
-            color: white;
-            font-size: 15px;
-            font-weight: bold;
-            padding: 10px;
-        }
+    <style>
+      .page-title {
+        color: #fff;
+        text-align: center;
+        font-size: 36px;
+        font-weight: 700;
+        margin-top: 20px;
+        margin-bottom: 30px;
+      }
 
+      .card {
+        background: #2f333e;
+        border: none;
+        border-radius: 10px;
+        padding: 25px;
+        color: #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      }
+
+      th {
+        background-color: #5e81ac;
+        color: #fff;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      td {
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      .status {
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+
+      .status.approved { color: #00b4d8; }
+      .status.returned { color: #f1fa8c; }
+      .status.rejected { color: #ff4b5c; }
+      .status.applied  { color: #e0e0e0; }
+
+      .img-book {
+        width: 80px;
+        height: auto;
+        border-radius: 6px;
+        border: 1px solid #555;
+      }
+
+      .btn {
+        padding: 4px 12px;
+        font-size: 14px;
+      }
+
+      .table > :not(caption) > * > * {
+        background-color: transparent;
+      }
     </style>
-    <!-- End Css-->
   </head>
   <body>
-    <!-- Header Navigation-->
-    @include('admin.header')    
-    <!-- End Header Navigation-->
-    <div class="d-flex align-items-stretch">
-      <!-- Sidebar Navigation-->
-      @include('admin.sidebar')
-      <!-- Sidebar Navigation end-->
+    @include('admin.header')
 
-      <!-- Body-->
+    <div class="d-flex align-items-stretch">
+      @include('admin.sidebar')
+
       <div class="page-content">
-        <div class="page-header">
-          <div class="container-fluid">
-            <table class="center">
-                <tr>
+        <div class="container-fluid">
+
+          <h1 class="page-title">Borrow Request</h1>
+
+          <div class="card">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead>
+                  <tr>
                     <th>User Name</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <th>Book title</th>
+                    <th>Book Title</th>
                     <th>Quantity</th>
-                    <th>Borrow Status</th>
+                    <th>Status</th>
                     <th>Book Image</th>
-                    <th>Change Status</th>
-                </tr>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($data as $req)
+                  <tr>
+                    <td>{{ $req->user->name }}</td>
+                    <td>{{ $req->user->email }}</td>
+                    <td>{{ $req->user->phone }}</td>
+                    <td>{{ $req->book->title }}</td>
+                    <td>{{ $req->book->quantity }}</td>
 
-                @foreach ($data as $data)
-
-                <tr>
-                    <td>{{ $data->user->name }}</td>
-                    <td>{{ $data->user->email }}</td>
-                    <td>{{ $data->user->phone }}</td>
-
-                    <td>{{ $data->book->title }}</td>
-                    <td>{{ $data->book->quantity }}</td>
                     <td>
-                      @if ($dta->status == 'approved')
-                      <span style="color: skyblue;">{{ $data->status }}</span>
-                      
-                      @endif
-
-                      @if ($dta->status == 'rejected')
-                      <span style="color: red;">{{ $data->status }}</span>
-                      
-                      @endif
-
-                      @if ($dta->status == 'returned')
-                      <span style="color: yellow;">{{ $data->status }}</span>
-                      
-                      @endif
-
-                      @if ($dta->status == 'Applied')
-                      <span style="color: white;">{{ $data->status }}</span>
-                      
-                      @endif
+                      <span class="status 
+                        @if($req->status == 'Approved') approved 
+                        @elseif($req->status == 'Returned') returned 
+                        @elseif($req->status == 'Rejected') rejected 
+                        @else applied @endif">
+                        {{ $req->status }}
+                      </span>
                     </td>
+
                     <td>
-                        <img style="height: 150px; width: 60px" src="book/{{ $data->book->book_img }}">
+                      <img src="{{ asset('book/' . $req->book->book_img) }}" alt="Book Image" class="img-book">
                     </td>
+
                     <td>
-                      <a class="btn btn-warning" href="{{ url('approve_book',$data->id) }}">Approved</a>
-                      <a class="btn btn-danger" href="{{ url('rejected_book',$data->id) }}">Rejected</a>
-                      <a class="btn btn-info" href="{{ url('return_book',$data->id) }}">Returned</a>
+                      <a href="{{ url('approved_book', $req->id) }}" class="btn btn-sm btn-warning">Approve</a>
+                      <a href="{{ url('returned_book', $req->id) }}" class="btn btn-sm btn-info">Returned</a>
+                      <a href="{{ url('rejected_book', $req->id) }}" class="btn btn-sm btn-danger">Reject</a>
                     </td>
-                </tr>
-
-                @endforeach
-
-            </table>
-
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
-       </div>
-    </div>
-      <!-- End Body-->
 
-      <!-- Footer-->
+        </div>
+      </div>
+
       @include('admin.footer')
-      <!-- End Footer-->
+    </div>
   </body>
 </html>

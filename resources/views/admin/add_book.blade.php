@@ -1,113 +1,135 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Css-->
     @include('admin.css')
-    <!-- End Css-->
-     <style>
-        .div_center {
-            text-align: center;
-            margin: auto;
-        }
+    <style>
+      .card {
+        background: #2f333e;
+        border: none;
+        border-radius: 8px;
+        color: #fff;
+      }
 
-        .title_deg {
-            color: white;
-            padding: 35px;
-            font-size: 40px;
-        }
+      .card-header {
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
 
-        label {
-            display: inline-block;
-            width: 200px;
-        }
+      label {
+        color: #fff;
+        font-weight: 500;
+        margin-bottom: 6px;
+      }
 
-        .div_pad {
-            padding: 15px;
-        }
-     </style>
+      .form-control, select, textarea {
+        background-color: #3a3f4b;
+        border: 1px solid #555;
+        color: #fff;
+      }
+
+      .form-control:focus, select:focus, textarea:focus {
+        background-color: #3a3f4b;
+        border-color: #007bff;
+        color: #fff;
+        box-shadow: none;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+    </style>
   </head>
+
   <body>
-    <!-- Header Navigation-->
-    @include('admin.header')    
-    <!-- End Header Navigation-->
+    @include('admin.header')
+
     <div class="d-flex align-items-stretch">
-      <!-- Sidebar Navigation-->
       @include('admin.sidebar')
-      <!-- Sidebar Navigation end-->
 
       <div class="page-content">
-        <div class="page-header">
-          <div class="container-fluid">
+        <div class="container-fluid py-4">
 
-              @if(session()->has('message'))
-                <div class="alert alert-success">
-                  <button type="button" class="close" data-dismiss="alert" aria-hiden="true">x</button>
-                    {{session()->get('message')}}
-                </div>
-              @endif
+          {{-- Flash Message --}}
+          @if(session()->has('message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ session()->get('message') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
 
-            <div class="div_center">
-
-            <h1 class="title_deg">Add Books</h1>
-
-            <form action="{{url('store_book')}}" method="POST" enctype="multipart/form-data">
-
-            @csrf
-
-                <div class="div_pad">
-                    <label>Book Title</label>
-                    <input type="text" name="title">
-                </div>
-                <div class="div_pad">
-                    <label>Author Name</label>
-                    <input type="text" name="auther_name">
-                </div>
-                <div class="div_pad">
-                    <label>Price</label>
-                    <input type="number" name="price">
-                </div>
-                <div class="div_pad">
-                    <label>Quantity</label>
-                    <input type="number" name="quantity">
-                </div>
-                <div class="div_pad">
-                    <label>Description</label>
-                    <textarea name="description"></textarea>
-                </div>
-                <div class="div_pad">
-                    <label>Category</label>
-                    <select name="category" require>
-                        <option>Select a Category</option>
-
-                        @foreach($data as $data)
-                        <option value="{{$data->id}}">{{$data->cat_title}}</option>
-                        @endforeach
-
-                    </select>
-                </div>
-                <div class="div_pad">
-                    <label>Book Image</label>
-                    <input type="file" name="book_img">
-                </div>
-                <div class="div_pad">
-                    <label>Auther Image</label>
-                    <input type="file" name="auther_img">
-                </div>
-
-                <div class="div_pad">
-                    <input type="submit" value="Add Book" class="btn btn-info">
-                </div>
-
-            </form>
-
+          {{-- Add Book Form --}}
+          <div class="card mx-auto" style="max-width: 800px;">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">Add New Book</h4>
+              <a href="{{ url('show_book') }}" class="btn btn-sm btn-secondary">← Back</a>
             </div>
 
+            <div class="card-body">
+              <form action="{{ url('store_book') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+
+                <div class="mb-3">
+                  <label for="title">Book Title</label>
+                  <input type="text" id="title" name="title" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="auther_name">Author Name</label>
+                  <input type="text" id="auther_name" name="auther_name" class="form-control" required>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="price">Price</label>
+                    <input type="number" id="price" name="price" class="form-control" required>
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" class="form-control" required>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="description">Description</label>
+                  <textarea id="description" name="description" class="form-control" rows="4"></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label for="category">Category</label>
+                  <select id="category" name="category" class="form-control" required>
+                    <option value="">Select a Category</option>
+                    @foreach($data as $category)
+                      <option value="{{ $category->id }}">{{ $category->cat_title }}</option>
+                    @endforeach
+                  </select>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="book_img">Book Image</label>
+                    <input type="file" id="book_img" name="book_img" class="form-control" accept="image/*" required>
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="auther_img">Author Image</label>
+                    <input type="file" id="auther_img" name="auther_img" class="form-control" accept="image/*">
+                  </div>
+                </div>
+
+                <div class="mt-4">
+                  <button type="submit" class="btn btn-primary">Add Book</button>
+                  <a href="{{ url('show_book') }}" class="btn btn-outline-light">Cancel</a>
+                </div>
+              </form>
+            </div>
           </div>
+
         </div>
       </div>
 
-      <!-- Footer-->
       @include('admin.footer')
-      <!-- End Footer-->
+    </div>
   </body>
 </html>

@@ -18,34 +18,42 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
-                        <img src="assets/images/logo.png" alt="">
+                    <a href="{{ Auth::check() ? url('/home') : url('/') }}" class="logo">
+                        <img src="{{ asset('images/logo.png') }}" alt="">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="{{url('explore')}}">Explore</a></li>
-                        <li><a href="details.html">Item Details</a></li>
-                       
-                        <li><a href="create.html">Create Yours</a></li>
+                        <li><a href="{{ Auth::check() ? url('/home') : url('/') }}" class="{{ request()->is('/') || request()->is('home') ? 'active' : '' }}">Home</a></li>
+                        <li><a href="{{url('explore')}}" class="{{ request()->is('explore') ? 'active' : '' }}">Explore </a></li>
+                        <li><a href="#categories" class="{{ request()->is('categories') ? 'active' : '' }}">Categories </a></li>
 
                       @if (Route::has('login'))
                       
                           @auth
-                          <li>
-                            <a href="{{ url('book_history') }}">My History</a>
-                          </li>
-                              <li>
-                                  <x-app-layout>
+                            <li>
+                                <a href="{{ url('book_history') }}" class="{{ request()->is('book_history') ? 'active' : '' }}">My History</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                  data-bs-toggle="dropdown" aria-expanded="false">
+                                  {{ Auth::user()->name }}
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="userDropdown">
 
-                                  </x-app-layout>
-                              </li>
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item text-danger">Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
                           @else
-                              <li><a href="{{ route('login') }}">Log in</a></li>
+                              <li><a href="{{ route('login') }}" class="{{ request()->is('login') ? 'active' : '' }}">Log in</a></li>
 
                               @if (Route::has('register'))
-                                  <li><a href="{{ route('register') }}">Register</a></li>
+                                  <li><a href="{{ route('register') }}" class="{{ request()->is('register') ? 'active' : '' }}">Register</a></li>
                               @endif
                           @endauth
 

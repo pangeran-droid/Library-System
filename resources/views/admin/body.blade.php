@@ -11,7 +11,7 @@
                 <div class="statistic-block block">
                   <div class="progress-details d-flex align-items-end justify-content-between">
                     <div class="title">
-                      <div class="icon"><i class="icon-user-1"></i></div><strong>total users</strong>
+                      <div class="icon"><i class="icon-user-1"></i></div><strong>Total User</strong>
                     </div>
                     <div class="number dashtext-1">{{ $user }}</div>
                   </div>
@@ -24,7 +24,7 @@
                 <div class="statistic-block block">
                   <div class="progress-details d-flex align-items-end justify-content-between">
                     <div class="title">
-                      <div class="icon"><i class="icon-contract"></i></div><strong>total books</strong>
+                      <div class="icon"><i class="icon-contract"></i></div><strong>Total Books</strong>
                     </div>
                     <div class="number dashtext-2">{{ $book }}</div>
                   </div>
@@ -37,7 +37,7 @@
                 <div class="statistic-block block">
                   <div class="progress-details d-flex align-items-end justify-content-between">
                     <div class="title">
-                      <div class="icon"><i class="icon-paper-and-pencil"></i></div><strong>borrowed books</strong>
+                      <div class="icon"><i class="icon-paper-and-pencil"></i></div><strong>Borrowed Books</strong>
                     </div>
                     <div class="number dashtext-3">{{ $borrow }}</div>
                   </div>
@@ -50,7 +50,7 @@
                 <div class="statistic-block block">
                   <div class="progress-details d-flex align-items-end justify-content-between">
                     <div class="title">
-                      <div class="icon"><i class="icon-writing-whiteboard"></i></div><strong>returned books</strong>
+                      <div class="icon"><i class="icon-writing-whiteboard"></i></div><strong>Returned Books</strong>
                     </div>
                     <div class="number dashtext-4">{{ $returned }}</div>
                   </div>
@@ -62,7 +62,7 @@
             </div>
           </div>
         </section>
-        <section class="no-padding-bottom">
+        <!-- <section class="no-padding-bottom">
           <div class="container-fluid">
             <div class="row">
               <div class="col-lg-4">
@@ -375,4 +375,4 @@
               </div>
             </div>
           </div>
-        </section>
+        </section> -->

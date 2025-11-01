@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('borrows', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('book_id')->constrained()->onDelete('cascade');
-            $table->unsignedInteger('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('book_id')->constrained()->onDeleted('cascade');
+            $table->foreignId('user_id')->constrained()->onDeleted('cascade');
             $table->string('status')->default('Rejected');
             $table->timestamps();
         });

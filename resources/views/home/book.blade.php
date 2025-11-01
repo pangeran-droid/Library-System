@@ -1,4 +1,4 @@
-  <div class="currently-market">
+  <div id="books" class="currently-market">
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
@@ -18,41 +18,45 @@
             </ul>
           </div>
         </div>
+
         <div class="col-lg-12">
           <div class="row grid">
 
-            @foreach($data as $data)
+          @foreach($data as $data)
 
             <div class="col-lg-6 currently-market-item all msc">
               <div class="item">
                 <div class="left-image">
-                  <img src="book/{{$data->book_img}}" alt="" style="border-radius: 20px; min-width: 195px;">
+                  <img src="{{ asset('book/' . $data->book_img) }}" alt="" style="border-radius: 20px; min-width: 195px;">
                 </div>
                 <div class="right-content">
-                  <h4>{{$data->tittle}}</h4>
+                  <h4>{{$data->title}}</h4>
                   <span class="author">
-                    <img src="auther/{{$data->auther_img}}" alt="" style="max-width: 50px; border-radius: 50%;">
+                    <img src="{{ asset('auther/' . $data->auther_img) }}" alt="" style="max-width: 50px; border-radius: 50%;">
                     <h6>{{$data->auther_name}}</h6>
                   </span>
                   <div class="line-dec"></div>
                   <span class="bid">
                     Current Available<br><strong>{{$data->quantity}}</strong><br> 
                   </span>
-                  <div class="text-button">
-                    <a href="{{url('book_detail',$data->id)}}">View Item Details</a>
-                  </div>
-                </br>
 
+                  <div class="text-button">
+                    <a href="{{url('book_details', $data->id)}}">View Book Details</a>
+                  </div>
+                  </br>
                   <div class="">
-                    <a class="btn btn-primary" href="{{url('borrow_books',$data->id)}}">Apply to Borrow</a>
+                    @auth
+                      <a class="btn btn-primary" href="{{ url('borrow_books', $data->id) }}">Apply to Borrow</a>
+                    @else
+                      <a class="btn btn-secondary disabled" href="#" title="Please login first">Login to Borrow</a>
+                    @endauth
                   </div>
                 </div>
               </div>
             </div>
-            
-            @endforeach
-          
 
+            @endforeach
+            
           </div>
         </div>
       </div>

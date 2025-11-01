@@ -38,22 +38,6 @@
         color: #ddd;
       }
 
-      .table img {
-        border-radius: 8px;
-        object-fit: cover;
-      }
-
-      .img_auther {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-      }
-
-      .img_book {
-        width: 80px;
-        height: auto;
-      }
-
       .btn {
         padding: 5px 10px;
         font-size: 14px;
@@ -61,6 +45,19 @@
 
       .alert {
         margin-bottom: 20px;
+      }
+
+      .search-bar input {
+        width: 220px;
+        padding: 5px 10px;
+        border-radius: 4px;
+        border: none;
+        outline: none;
+      }
+
+      .search-bar button {
+        padding: 6px 10px;
+        margin-left: 5px;
       }
     </style>
   </head>
@@ -74,7 +71,7 @@
       <div class="page-content">
         <div class="container-fluid py-4">
 
-          {{-- Flash Message --}}
+          {{-- ✅ Flash Message --}}
           @if(session()->has('message'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
               {{ session()->get('message') }}
@@ -84,13 +81,17 @@
             </div>
           @endif
 
-          {{-- Book Table --}}
+          {{-- 🧍 All Users Table --}}
           <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-              <h4 class="mb-0">All Books</h4>
-              <div>
-                <a href="{{ url('add_book') }}" class="btn btn-primary btn-sm">+ Add New Book</a>
-                <a href="{{ route('generateAllQrPdf') }}" class="btn btn-danger btn-sm ml-2">📄 Download All QR</a>
+              <h4 class="mb-0">All Users</h4>
+              
+              <div class="d-flex align-items-center">
+                {{-- 🔍 Search Bar --}}
+                <form action="{{ url('show_user') }}" method="GET" class="search-bar d-flex align-items-center">
+                  <input type="text" name="search" placeholder="Search name or email..." value="{{ request('search') }}">
+                  <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                </form>
               </div>
             </div>
 
@@ -98,51 +99,37 @@
               <table class="table table-bordered table-hover align-middle">
                 <thead>
                   <tr>
-                    <th>Book Title</th>
-                    <th>Author Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Author Image</th>
-                    <th>Book Image</th>
-                    <th>QR Code</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>User Type</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  @foreach($book as $b)
+                  @forelse($data as $user)
                     <tr>
-                      <td>{{ $b->title }}</td>
-                      <td>{{ $b->auther_name }}</td>
-                      <td>Rp{{ number_format($b->price, 0, ',', '.') }}</td>
-                      <td>{{ $b->quantity }}</td>
-                      <td style="max-width: 250px; white-space: normal;">{{ Str::limit($b->description, 100) }}</td>
-                      <td>{{ $b->category->cat_title ?? '-' }}</td>
-
+                      <td>{{ $user->name }}</td>
+                      <td>{{ $user->email }}</td>
+                      <td>{{ $user->phone ?? '-' }}</td>
+                      <td>{{ $user->address ?? '-' }}</td>
+                      <td>{{ ucfirst($user->usertype) }}</td>
                       <td>
-                        <img class="img_auther" src="{{ asset('auther/' . $b->auther_img) }}" alt="Author">
-                      </td>
-
-                      <td>
-                        <img class="img_book" src="{{ asset('book/' . $b->book_img) }}" alt="Book">
-                      </td>
-
-                      <td>
-                        <img src="data:image/png;base64,{{ $b->qr_base64 }}" 
-                             alt="QR Code" 
-                             style="width:80px; border:2px solid #444; background:#fff; border-radius:6px; padding:4px;">
-                        <p class="mt-2 text-light"><strong>{{ $b->book_code }}</strong></p>
-                        <a href="{{ url('download-qr/' . $b->id) }}" class="btn btn-secondary btn-sm mt-2">Download QR</a>
-                      </td>
-
-                      <td>
-                        <a href="{{ url('edit_book', $b->id) }}" class="btn btn-info btn-sm">Edit</a>
-                        <a href="{{ url('book_delete', $b->id) }}" onclick="confirmation(event)" class="btn btn-danger btn-sm">Delete</a>
+                        @if($user->usertype != 'admin')
+                          <a href="{{ url('edit_user', $user->id) }}" class="btn btn-info btn-sm">Edit</a>
+                          <a href="{{ url('delete_user', $user->id) }}" onclick="confirmation(event)" class="btn btn-danger btn-sm">Delete</a>
+                        @else
+                          <span class="text-muted">Admin</span>
+                        @endif
                       </td>
                     </tr>
-                  @endforeach
+                  @empty
+                    <tr>
+                      <td colspan="6" class="text-center text-muted">No users found.</td>
+                    </tr>
+                  @endforelse
                 </tbody>
               </table>
             </div>
@@ -161,7 +148,7 @@
 
         swal({
           title: "Are you sure?",
-          text: "Once deleted, this book record cannot be recovered!",
+          text: "Once deleted, this user cannot be restored!",
           icon: "warning",
           buttons: true,
           dangerMode: true,

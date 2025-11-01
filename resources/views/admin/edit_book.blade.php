@@ -1,127 +1,148 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Css-->
     @include('admin.css')
-    <style type="text/css">
-    .div_center
-    {
-        text.align: center;
-        margin: auto;
-    }
-    .title
-    {
-        color: white;
+
+    <style>
+      .card {
+        background: #2f333e;
+        border: none;
+        border-radius: 8px;
+        color: #fff;
         padding: 30px;
-        font-size: 30px;
-        font-wight: bold;
-    }
-    .label
-    {
-        display: inline-black;
-        width: 200px;
-    }
-    .div_pad
-    {
-        padding: 15%;
-    }
+        margin-top: 40px;
+      }
+
+      .card h1 {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 25px;
+        text-align: center;
+        color: #fff;
+      }
+
+      label {
+        font-weight: 600;
+        margin-bottom: 5px;
+        display: block;
+      }
+
+      .form-control, select, textarea, input[type="file"] {
+        background-color: #3b4252;
+        border: 1px solid #555;
+        color: #fff;
+      }
+
+      .form-control:focus, select:focus, textarea:focus {
+        border-color: #5e81ac;
+        outline: none;
+        box-shadow: none;
+      }
+
+      .img-preview {
+        border-radius: 8px;
+        margin-top: 10px;
+        width: 100px;
+        height: auto;
+        border: 1px solid #555;
+      }
+
+      .btn {
+        padding: 8px 20px;
+      }
     </style>
-    <!-- End Css-->
   </head>
   <body>
-    <!-- Header Navigation-->
-    @include('admin.header')    
-    <!-- End Header Navigation-->
+    @include('admin.header')
     <div class="d-flex align-items-stretch">
-      <!-- Sidebar Navigation-->
       @include('admin.sidebar')
-      <!-- Sidebar Navigation end-->
-    <div class="page-content">
-        <div class="page-header">
-          <div class="container-fluid">
 
-          <div class="div_center">
+      <div class="page-content">
+        <div class="container-fluid">
 
-            <h1 class="title">Update book</h1>
-            <form action="{{url('update_book',$data->id)}}" method="Post" enctype="multipart/form-data">
-                @csrf
-                <div class="div_pad">
-                    <label>Book title</label>
-                    <input type="text" name="title" value="{{$data->title}}">
+          {{-- Flash Message --}}
+          @if(session()->has('message'))
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+              {{ session()->get('message') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+
+          {{-- Card Form --}}
+          <div class="card">
+            <h1>Update Book</h1>
+
+            <form action="{{ url('update_book', $data->id) }}" method="POST" enctype="multipart/form-data">
+              @csrf
+
+              <div class="mb-3">
+                <label>Book Title</label>
+                <input type="text" name="title" value="{{ $data->title }}" class="form-control">
+              </div>
+
+              <div class="mb-3">
+                <label>Author Name</label>
+                <input type="text" name="auther_name" value="{{ $data->auther_name }}" class="form-control">
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label>Price</label>
+                  <input type="number" name="price" value="{{ $data->price }}" class="form-control">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label>Quantity</label>
+                  <input type="number" name="quantity" value="{{ $data->quantity }}" class="form-control">
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label>Description</label>
+                <textarea name="description" class="form-control" rows="3">{{ $data->description }}</textarea>
+              </div>
+
+              <div class="mb-3">
+                <label>Category</label>
+                <select name="category" class="form-control">
+                  <option value="{{ $data->category_id }}">{{ $data->category->cat_title }}</option>
+                  @foreach($category as $cat)
+                    <option value="{{ $cat->id }}">{{ $cat->cat_title }}</option>
+                  @endforeach
+                </select>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4 text-center">
+                  <label>Current Author Image</label>
+                  <div>
+                    <img src="{{ asset('auther/' . $data->auther_img) }}" alt="Author Image" class="img-preview">
+                  </div>
+                  <label class="mt-2">Change Author Image</label>
+                  <input type="file" name="auther_img" class="form-control">
                 </div>
 
-                <div class="div_pad">
-                    <label>Auther Name</label>
-                    <input type="text" name="auther_name" value="{{$data->auther_name}}">
+                <div class="col-md-6 mb-4 text-center">
+                  <label>Current Book Image</label>
+                  <div>
+                    <img src="{{ asset('book/' . $data->book_img) }}" alt="Book Image" class="img-preview">
+                  </div>
+                  <label class="mt-2">Change Book Image</label>
+                  <input type="file" name="book_img" class="form-control">
                 </div>
+              </div>
 
-                <div class="div_pad">
-                    <label>Price</label>
-                    <input type="text" name="price" value="{{$data->price}}">
-                </div>
-
-                <div class="div_pad">
-                    <label>Quantity</label>
-                    <input type="text" name="quantity" value="{{$data->quantity}}">
-                </div>
-
-                <div class="div_pad">
-                    <label>Description</label>
-                    <texarea name="description">{{$data->description}}</texarea>
-                </div>
-
-                <div class="div_pad">
-                    <label>Category</label>
-
-                    <select name="category">
-                        <option value="{{$data->category_id}}">{{$data->category->cat_tittle}}</option>
-                        @foreach($category as $category)
-
-                        <option value="{{$category->id}}">{{$category->cat_tittle}}</option>
-
-                        @endforeach
-                    </select>
-                    <div class="div_pad">
-                        <label>Current Auther Image</label>
-                        <img style="width: 80px; border-radius: 50%; margin:auto;" src="/auther/{{$data->auther_img}}">
-                    </div>
-
-                    <div class="div_pad">
-                        <label>Change Auther Image</label>
-                        <input type="file" name="auther_img">
-                    </div>
-
-                    <div class="div_pad">
-                        <label>Current Book Image</label>
-                        <img style="width: 80px; margin:auto;" src="/book/{{$data->book_img}}">
-                    </div>
-
-                    <div class="div_pad">
-                        <label>Change Book Image</label>
-                        <input type="file" name="book_img">
-                    </div>
-
-                    <div class="div_pad">
-                        <input class="btn btn-info" type="submit" value="Update Book">
-                    </div>
-
-                </div>
-           
+              <div class="text-center mt-4">
+                <input type="submit" value="Update Book" class="btn btn-info">
+                <a href="{{ url('show_book') }}" class="btn btn-outline-light">Cancel</a>
+              </div>
             </form>
-          
-          </div>          
           </div>
-
         </div>
+      </div>
 
-    </div>
-
-      <!-- Body-->
-      @include('admin.body')
-      <!-- End Body-->
-
-      <!-- Footer-->
       @include('admin.footer')
-      <!-- End Footer-->
+    </div>
   </body>
 </html>

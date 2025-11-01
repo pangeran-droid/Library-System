@@ -22,6 +22,7 @@
 ✅ Fitur Pencarian & Filter Berdasarkan Kategori  
 ✅ Dashboard Admin Lengkap  
 ✅ Responsif & UI Modern  
+✅ QR Code Identifikasi Buku  
 
 ---
 
@@ -35,6 +36,8 @@
 | TailwindCSS | Default Jetstream |
 | Bootstrap | (untuk halaman Home UI) |
 | MySQL/MariaDB | Latest |
+| DOMPDF | Latest |
+| Endroid/QRCode | Latest |
 
 ---
 
@@ -49,6 +52,13 @@ Pastikan software berikut sudah terinstall:
 | Node.js & npm | https://nodejs.org/en/download/ |
 | Git | https://git-scm.com/downloads |
 | MySQL/MariaDB | Bundle dengan XAMPP/Laragon |
+
+---
+
+## 📚 Referensi Pembelajaran
+
+- [YouTube Playlist – Laravel Library Management System Project Tutorial](https://www.youtube.com/playlist?list=PLm8sgxwSZoffQAcAEHAlfyuWGs7U9ZJin)
+> Referensi utama dari seri pembelajaran di YouTube. Terima kasih kepada kreator konten atas ilmunya.
 
 ---
 
@@ -131,8 +141,67 @@ Aplikasi akan berjalan di http://127.0.0.1:8000. Buka di browser Anda untuk meng
 - Password: password
 ```
 
-
 ## 📄 License
 This project is open-source and available under the MIT License.
 See the LICENSE file for more details.
 
+---
+
+<h2 align="center">👥 Pembagian Tugas Anggota</h2>
+
+<table align="center">
+  <tr>
+    <th>No</th>
+    <th>Nama Anggota</th>
+    <th>Tugas / Kontribusi</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td><b>Mahesa Muhammad Patih</b> (42423019)</td>
+    <td>
+      Setup Frontend dan Backend.<br>
+      Integrasi QR Code dan PDF generator.
+    </td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><b>Iim Abdul Karim</b> (42423027)</td>
+    <td>
+      Membuat fungsi Edit dan Update data buku.<br>
+      Menampilkan daftar buku di halaman Home.<br>
+      Mengizinkan pengguna untuk meminjam buku dari sistem perpustakaan (Library System).<br>
+      Melakukan pemeliharaan sistem secara berkala (Maintenance Berkala).
+    </td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td><b>Cahyo Qolbu Isrobany</b> (123)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td><b>M.Rifqi Zidan</b> (42423038)</td>
+    <td>
+      Menampilkan status buku di beranda pengguna.<br>
+      Menambahkan fitur untuk membatalkan permintaan buku melalui beranda Laravel.<br>
+      Menampilkan semua buku di halaman "Jelajahi" (Explore).
+    </td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td><b>Dita Supriyadi</b> (123)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td><b>Adil Kusuma</b> (42423053)</td>
+    <td>
+      Menambahkan middleware, seperti:<br>
+        - Autentikasi pengguna,<br>
+        - Pengecekan hak akses,<br>
+        - Filter terhadap request.<br>
+      Membangun database untuk buku dan anggota.<br>
+      Mengembangkan fitur peminjaman dan pengembalian buku.
+    </td>
+  </tr>
+</table>
