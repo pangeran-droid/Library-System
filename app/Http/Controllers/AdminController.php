@@ -115,31 +115,37 @@ class AdminController extends Controller
 
     public function store_book(Request $request)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'auther_name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'quantity' => 'required|integer|min:1',
+            'description' => 'nullable|string|max:1000',
+            'category' => 'required|exists:categories,id',
+            'book_img' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'auther_img' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
         $data = new Book;
-
-        $data->title = $request->title;
-        $data->auther_name = $request->auther_name;
-        $data->price = $request->price;
-        $data->quantity = $request->quantity;
-        $data->description = $request->description;
-        $data->category_id = $request->category;
+        $data->title = $validatedData['title'];
+        $data->auther_name = $validatedData['auther_name'];
+        $data->price = $validatedData['price'];
+        $data->quantity = $validatedData['quantity'];
+        $data->description = $validatedData['description'] ?? null;
+        $data->category_id = $validatedData['category'];
         $data->book_code = 'BK-' . strtoupper(uniqid());
-        $book_image = $request->book_img;
-        $auther_image = $request->auther_img;
 
-        if($book_image) {
-            $book_image_name = time().'.'.$book_image->getClientOriginalExtension();
-
-            $request->book_img->move('book', $book_image_name);
-
+        if ($request->hasFile('book_img')) {
+            $book_image = $request->file('book_img');
+            $book_image_name = time().'_'.$book_image->getClientOriginalName();
+            $book_image->move(public_path('book'), $book_image_name);
             $data->book_img = $book_image_name;
         }
 
-        if($auther_image) {
-            $auther_image_name = time().'.'.$auther_image->getClientOriginalExtension();
-
-            $request->auther_img->move('auther', $auther_image_name);
-
+        if ($request->hasFile('auther_img')) {
+            $auther_image = $request->file('auther_img');
+            $auther_image_name = time().'_'.$auther_image->getClientOriginalName();
+            $auther_image->move(public_path('auther'), $auther_image_name);
             $data->auther_img = $auther_image_name;
         }
 
@@ -189,36 +195,51 @@ class AdminController extends Controller
 
     public function update_book(Request $request, $id)
     {
-        $data = Book::find($id);
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'auther_name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'quantity' => 'required|integer|min:1',
+            'description' => 'nullable|string|max:1000',
+            'category' => 'required|exists:categories,id',
+            'book_img' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'auther_img' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
 
-        $data->title = $request->title;
-        $data->auther_name = $request->auther_name;
-        $data->price = $request->price;
-        $data->quantity = $request->quantity;
-        $data->description = $request->description;
-        $data->category_id = $request->category;
-        $book_image = $request->book_img;
-        $auther_image = $request->auther_img;
+        $data = Book::findOrFail($id);
 
-        if($book_image) {
-            $book_image_name = time().'.'.$book_image->getClientOriginalExtension();
+        $data->title = $validatedData['title'];
+        $data->auther_name = $validatedData['auther_name'];
+        $data->price = $validatedData['price'];
+        $data->quantity = $validatedData['quantity'];
+        $data->description = $validatedData['description'] ?? null;
+        $data->category_id = $validatedData['category'];
 
-            $request->book_img->move('book', $book_image_name);
+        if ($request->hasFile('book_img')) {
+            if ($data->book_img && file_exists(public_path('book/' . $data->book_img))) {
+                unlink(public_path('book/' . $data->book_img));
+            }
 
+            $book_image = $request->file('book_img');
+            $book_image_name = time() . '_' . $book_image->getClientOriginalName();
+            $book_image->move(public_path('book'), $book_image_name);
             $data->book_img = $book_image_name;
         }
 
-        if($auther_image) {
-            $auther_image_name = time().'.'.$auther_image->getClientOriginalExtension();
+        if ($request->hasFile('auther_img')) {
+            if ($data->auther_img && file_exists(public_path('auther/' . $data->auther_img))) {
+                unlink(public_path('auther/' . $data->auther_img));
+            }
 
-            $request->auther_img->move('auther', $auther_image_name);
-
+            $auther_image = $request->file('auther_img');
+            $auther_image_name = time() . '_' . $auther_image->getClientOriginalName();
+            $auther_image->move(public_path('auther'), $auther_image_name);
             $data->auther_img = $auther_image_name;
         }
 
         $data->save();
 
-        return redirect('/show_book')->with('message', 'Book Updates Successfully');
+        return redirect('/show_book')->with('message', 'Book Updated Successfully');
     }
 
     public function borrow_request()

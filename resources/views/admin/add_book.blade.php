@@ -57,6 +57,18 @@
               </button>
             </div>
           @endif
+          
+          {{-- Validation Errors --}}
+          @if ($errors->any())
+            <div class="alert alert-danger">
+              <strong>There is an error:</strong>
+              <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
 
           {{-- Add Book Form --}}
           <div class="card mx-auto" style="max-width: 800px;">
