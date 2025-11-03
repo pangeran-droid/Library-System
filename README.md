@@ -175,8 +175,12 @@ See the LICENSE file for more details.
   </tr>
   <tr>
     <td>3</td>
-    <td><b>Cahyo Qolbu Isrobany</b> (123)</td>
-    <td></td>
+    <td><b>Cahyo Qolbu Isrobbany</b> (42423037)</td>
+    <td>
+        Menampilkan data permintaan peminjaman buku pada panel admin.<br>
+        Mengubah status buku oleh admin.<br>
+        Mengimplementasikan fitur lupa/reset password pada Laravel.
+    </td>
   </tr>
   <tr>
     <td>4</td>
