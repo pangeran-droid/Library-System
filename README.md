@@ -5,6 +5,15 @@
 </p>
 
 <h2 align="center">📚 Library Management System</h2>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-10-red" />
+  <img src="https://img.shields.io/badge/PHP-8.1+-blue" />
+  <img src="https://img.shields.io/github/license/pangeran-droid/Library-System" />
+  <img src="https://img.shields.io/github/contributors/pangeran-droid/Library-System" />
+  <img src="https://img.shields.io/github/stars/pangeran-droid/Library-System?style=social" />
+</p>
+
 <p align="center">
   Sistem manajemen perpustakaan berbasis web menggunakan <strong>Laravel 10</strong>, <strong>Jetstream</strong>, dan <strong>Livewire</strong>.
   <br>
@@ -144,3 +153,11 @@ Aplikasi akan berjalan di http://127.0.0.1:8000. Buka di browser Anda untuk meng
 ## 📄 License
 This project is open-source and available under the MIT License.
 See the LICENSE file for more details.
+
+## 👥 Contributors
+
+<p align="center">
+  <a href="https://github.com/pangeran-droid/Library-System/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=pangeran-droid/Library-System" />
+  </a>
+</p>
