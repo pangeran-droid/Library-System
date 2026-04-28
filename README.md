@@ -150,14 +150,48 @@ Aplikasi akan berjalan di http://127.0.0.1:8000. Buka di browser Anda untuk meng
 - Password: password
 ```
 
+## 👁️ Pratinjau
+
+| Home | Login |
+|---|---|
+| <img src="public/preview/home.png" width="400"> | <img src="public/preview/login.png" width="400"> |
+
+| Register | Dashboard |
+|---|---|
+| <img src="public/preview/register.png" width="400"> | <img src="public/preview/dashboard.png" width="400"> |
+
 ## 📄 License
 This project is open-source and available under the MIT License.
 See the LICENSE file for more details.
 
 ## 👥 Contributors
 
-<p align="center">
+<!-- <p align="center">
   <a href="https://github.com/pangeran-droid/Library-System/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=pangeran-droid/Library-System" />
+  </a>
+</p> -->
+
+<p align="center">
+  <a href="https://github.com/pangeran-droid">
+    <img src="https://github.com/pangeran-droid.png" width="80" />
+  </a>
+  <a href="https://github.com/DitaSupriyadi18">
+    <img src="https://github.com/DitaSupriyadi18.png" width="80" />
+  </a>
+  <a href="https://github.com/Cahyo661">
+    <img src="https://github.com/Cahyo661.png" width="80" />
+  </a>
+  <a href="https://github.com/mrifqizidan7">
+    <img src="https://github.com/mrifqizidan7.png" width="80" />
+  </a>
+  <a href="https://github.com/iim028">
+    <img src="https://github.com/iim028.png" width="80" />
+  </a>
+  <a href="https://github.com/fathullohalfathir">
+    <img src="https://github.com/fathullohalfathir.png" width="80" />
+  </a>
+  <a href="https://github.com/Adil8566">
+    <img src="https://github.com/Adil8566.png" width="80" />
   </a>
 </p>
