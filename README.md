@@ -15,162 +15,189 @@
 </p>
 
 <p align="center">
-  Sistem manajemen perpustakaan berbasis web menggunakan <strong>Laravel 10</strong>, <strong>Jetstream</strong>, dan <strong>Livewire</strong>.
+  A web-based library management system built with <strong>Laravel 10</strong>, <strong>Jetstream</strong>, and <strong>Livewire</strong>.
   <br>
-  <strong>Mengelola koleksi buku, peminjaman, kategori, serta manajemen pengguna dengan mudah dan aman.</strong>
+  <strong>Easily and securely manage book collections, borrowing transactions, categories, and user management.</strong>
 </p>
 
 ---
 
-## ✨ Fitur Utama
+## ✨ Features
 
-✅ Autentikasi & Manajemen User (Jetstream + Roles)  
-✅ CRUD Buku dan Kategori  
-✅ Sistem Peminjaman / Pengembalian Buku  
-✅ Pemberitahuan & Validasi Stok Buku  
-✅ Fitur Pencarian & Filter Berdasarkan Kategori  
-✅ Dashboard Admin Lengkap  
-✅ Responsif & UI Modern  
-✅ QR Code Identifikasi Buku  
+✅ User Authentication & Management (Jetstream + Roles)  
+✅ Book & Category CRUD Operations  
+✅ Book Borrowing & Return System  
+✅ Book Stock Validation & Notifications  
+✅ Search & Category Filtering  
+✅ Complete Admin Dashboard  
+✅ Responsive & Modern UI  
+✅ QR Code Book Identification  
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+## 🛠️ Technologies Used
 
-| Teknologi | Versi |
-|----------|-------|
+| Technology | Version |
+|------------|---------|
 | Laravel | 10.x |
 | PHP | 8.1+ |
 | Livewire | Jetstream Stack |
-| TailwindCSS | Default Jetstream |
-| Bootstrap | (untuk halaman Home UI) |
+| TailwindCSS | Jetstream Default |
+| Bootstrap | (For Home UI) |
 | MySQL/MariaDB | Latest |
 | DOMPDF | Latest |
 | Endroid/QRCode | Latest |
 
 ---
 
-## ⚠️ Prasyarat (Wajib)
+## ⚠️ Prerequisites
 
-Pastikan software berikut sudah terinstall:
+Make sure the following software is installed on your machine:
 
-| Software | Link |
-|---------|------|
+| Software | Download |
+|----------|----------|
 | PHP 8.1+ | https://www.php.net/downloads.php |
 | Composer | https://getcomposer.org/download/ |
 | Node.js & npm | https://nodejs.org/en/download/ |
 | Git | https://git-scm.com/downloads |
-| MySQL/MariaDB | Bundle dengan XAMPP/Laragon |
+| MySQL/MariaDB | Included with XAMPP/Laragon |
 
 ---
 
-## 📚 Referensi Pembelajaran
+## 📚 Learning Resources
 
 - [YouTube Playlist – Laravel Library Management System Project Tutorial](https://www.youtube.com/playlist?list=PLm8sgxwSZoffQAcAEHAlfyuWGs7U9ZJin)
-> Referensi utama dari seri pembelajaran di YouTube. Terima kasih kepada kreator konten atas ilmunya.
+
+> The main reference for this project comes from the YouTube tutorial series. Special thanks to the content creator for sharing their knowledge.
 
 ---
 
-## 🚀 Instalasi & Cara Menjalanka
+## 🚀 Installation & Setup
 
-Ikuti langkah-langkah di bawah ini secara berurutan.
+Follow the steps below in order.
 
-### 1️⃣ Clone Repository
+### 1️⃣ Clone the Repository
 
-Buka Terminal (CMD/PowerShell/Git Bash) dan jalankan perintah berikut:
+Open your terminal (CMD, PowerShell, or Git Bash) and run:
 
 ```bash
 git clone https://github.com/pangeran-droid/Library-System.git
 cd Library-System
 ```
 
-### 2️⃣ Install Dependency Laravel (PHP)
+### 2️⃣ Install Laravel Dependencies (PHP)
 
 ```bash
 composer install
 ```
-(⚠️ Jika Composer tidak ditemukan, pastikan Anda sudah menginstalnya.)
 
-### 3️⃣ Install Dependency Frontend (Node.js)
+> ⚠️ If Composer is not recognized, make sure it has been installed correctly.
 
-Install dependency frontend dan build asset menggunakan npm:
+### 3️⃣ Install Frontend Dependencies (Node.js)
+
+Install the frontend dependencies and build the assets:
 
 ```bash
 npm install
 npm run build
 ```
-(⚠️ Jika npm tidak ditemukan, pastikan Anda sudah menginstal Node.js.)
 
-### 4️⃣ Salin File .env
+> ⚠️ If npm is not recognized, make sure Node.js has been installed.
+
+### 4️⃣ Copy the Environment File
 
 ```bash
 cp .env.example .env
 ```
 
-### 5️⃣ Generate APP_KEY
+### 5️⃣ Generate the Application Key
 
 ```bash
 php artisan key:generate
 ```
 
-### 6️⃣ Konfigurasi Database
+### 6️⃣ Configure the Database
 
-```bash
+Update your `.env` file:
+
+```env
 DB_DATABASE=library_system
 DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### 7️⃣ Migrasi Database
+### 7️⃣ Run Database Migration
 
 ```bash
 php artisan migrate
 php artisan db:seed
 ```
-### 8️⃣ Jalankan Server
 
-Setelah semua selesai, jalankan server Laravel dengan perintah berikut:
+### 8️⃣ Start the Development Server
+
+After everything is configured, start the Laravel development server:
 
 ```bash
 php artisan serve
 ```
-Aplikasi akan berjalan di http://127.0.0.1:8000. Buka di browser Anda untuk mengakses aplikasi.
 
-### 🔐 Akun Login Default
+The application will be available at:
 
-#### Login Admin:
-```bash
-- Email: admin@gmail.com
-- Password: password
+```
+http://127.0.0.1:8000
 ```
 
-#### Login User:
-```bash
-- Email: user@gmail.com
-- Password: password
+Open the URL in your browser to access the application.
+
+---
+
+## 🔐 Default Login Credentials
+
+### Admin Account
+
+```text
+Email: admin@gmail.com
+Password: password
 ```
 
-## 👁️ Pratinjau
+### User Account
+
+```text
+Email: user@gmail.com
+Password: password
+```
+
+---
+
+## 👁️ Preview
 
 | Home | Login |
-|---|---|
+|------|-------|
 | <img src="public/preview/home.png" width="400"> | <img src="public/preview/login.png" width="400"> |
 
 | Register | Dashboard |
-|---|---|
+|-----------|-----------|
 | <img src="public/preview/register.png" width="400"> | <img src="public/preview/dashboard.png" width="400"> |
 
+---
+
 ## 📄 License
+
 This project is open-source and available under the MIT License.
-See the LICENSE file for more details.
+
+See the **LICENSE** file for more details.
+
+---
 
 ## 👥 Contributors
 
-<!-- <p align="center">
+<!--
+<p align="center">
   <a href="https://github.com/pangeran-droid/Library-System/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=pangeran-droid/Library-System" />
   </a>
-</p> -->
+</p>
+-->
 
 <p align="center">
   <a href="https://github.com/pangeran-droid">
