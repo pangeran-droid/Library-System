@@ -81,8 +81,8 @@ Follow the steps below in order.
 Open your terminal (CMD, PowerShell, or Git Bash) and run:
 
 ```bash
-git clone https://github.com/pangeran-droid/Library-System.git
-cd Library-System
+git clone https://github.com/pangeran-droid/library-management-system.git
+cd library-management-system
 ```
 
 ### 2️⃣ Install Laravel Dependencies (PHP)
@@ -201,24 +201,24 @@ See the **LICENSE** file for more details.
 
 <p align="center">
   <a href="https://github.com/pangeran-droid">
-    <img src="https://github.com/pangeran-droid.png" width="80" />
+    <img src="https://github.com/pangeran-droid.png" width="65" />
   </a>
   <a href="https://github.com/DitaSupriyadi18">
-    <img src="https://github.com/DitaSupriyadi18.png" width="80" />
+    <img src="https://github.com/DitaSupriyadi18.png" width="65" />
   </a>
   <a href="https://github.com/Cahyo661">
-    <img src="https://github.com/Cahyo661.png" width="80" />
+    <img src="https://github.com/Cahyo661.png" width="65" />
   </a>
   <a href="https://github.com/mrifqizidan7">
-    <img src="https://github.com/mrifqizidan7.png" width="80" />
+    <img src="https://github.com/mrifqizidan7.png" width="65" />
   </a>
   <a href="https://github.com/iim028">
-    <img src="https://github.com/iim028.png" width="80" />
+    <img src="https://github.com/iim028.png" width="65" />
   </a>
   <a href="https://github.com/fathullohalfathir">
-    <img src="https://github.com/fathullohalfathir.png" width="80" />
+    <img src="https://github.com/fathullohalfathir.png" width="65" />
   </a>
   <a href="https://github.com/Adil8566">
-    <img src="https://github.com/Adil8566.png" width="80" />
+    <img src="https://github.com/Adil8566.png" width="65" />
   </a>
 </p>
